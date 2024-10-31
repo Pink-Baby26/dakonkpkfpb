@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPK dan FPB dengan Drag and Drop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="flex justify-center min-h-screen bg-[#e0dcd3]">
+  <div>
+  <h1 class="p-8 text-4xl font-extrabold leading-none tracking-tight text-[#d3b18a ] md:text-5xl lg:text-6xl dark:text-[#d3b18a]">DAKON KPK DAN FPB</h1>
+  <div class="flex flex-col items-center space-y-6">
+    <div id="input-section" class="flex flex-col items-center space-y-6">
+      <!-- Input Number 1 -->
+      <div class="flex items-center space-x-2">
+        <h3 class="text-black font-bold">Angka Pertama</h3>
+        <button onclick="decrement('number1')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
+          -
+        </button>
+        <input id="number1" type="number" value="0" min="0" class="w-10 text-right font-bold text-lg bg-[#e0dcd3] rounded">
+        <button onclick="increment('number1')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
+          +
+        </button>
+      </div>
+    
+      <!-- Input Number 2 -->
+      <div class="flex items-center space-x-2">
+        <h3 class="text-black font-bold">Angka Pertama</h3>
+        <button onclick="decrement('number2')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
+          -
+        </button>
+        <input id="number2" type="number" value="0" min="0" class="w-10 text-right font-bold text-lg bg-[#e0dcd3] rounded">
+        <button onclick="increment('number2')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
+          +
+        </button>
+      </div>
+    
+      <!-- Tombol Mulai -->
+      <button onclick="start()" class="bg-[#d3b18a] text-black font-bold min-w-full py-2 rounded hover:bg-[#b99a76] hover:text-white">
+        Mulai
+      </button>
+    </div>    
+
+    <!-- KPK and FPB Buttons (Initially Hidden) -->
+    <div id="action-buttons" class="items-center space-y-2 mt-4 hidden">
+      <div id="instruction-text" class="text-black flex justify-center font-bold hidden">
+        Pilih Perhitungan Yang Akan Digunakan :
+      </div>
+      <div id="pilih-text" class="text-black flex justify-center font-bold hidden">
+        Perhitungan Yang Dipilih :
+      </div>
+      <div class="flex justify-around w-80 h-10">
+      <button onclick="calculateKPK()" id="kpk-btn" class="bg-[#d3b18a] text-black font-bold px-4 py-2 rounded hover:bg-[#b99a76] hover:text-white">
+        KPK
+      </button>
+      <button onclick="calculateFPB()" id="fpb-btn" class="bg-[#d3b18a] text-black font-bold px-4 py-2 rounded hover:bg-[#b99a76] hover:text-white">
+        FPB
+      </button>
+    </div>
+    </div>
+
+
+    <!-- Objek draggable yang akan dibuat berdasarkan input number (disembunyikan awalnya) -->
+  <div id="draggableObjects" class="flex space-x-4 mb-4 hidden">
+    <!-- Objek draggable akan diisi menggunakan JavaScript -->
+  </div>
+
+    <!-- Circles and 6x6 Grid (Initially Hidden) -->
+    <div id="output-section" class="flex flex-col items-center space-y-6 mt-6 hidden">
+    </div>    
+
+      <!-- 6x6 Button Grid -->
+      <div id="button-grid" class="grid grid-cols-6 gap-2 rounded-full">
+        <!-- Buttons will be inserted here by JavaScript -->
+      </div>
+      <div class="flex justify-between w-80 h-10">
+      <button id="reset-btn" onclick="resetGrid()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hidden">
+        Reset
+      </button>
+
+      <button id="next-btn" onclick="showNextOptions()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hidden">
+        Lanjut
+      </button>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
