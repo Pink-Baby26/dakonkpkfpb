@@ -95,7 +95,7 @@ function populateGrid(value) {
 
   for (let i = 1; i <= 36; i++) {
     const button = document.createElement('button');
-    button.className = 'bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded relative';
+    button.className = 'bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-full relative';
     button.ondrop = drop;
     button.ondragover = allowDrop;
 
