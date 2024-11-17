@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+        @font-face /*perintah untuk memanggil font eksternal*/
+        {
+            font-family: 'Dynapuff-medium'; /*memberikan nama bebas untuk font*/
+            src: url('fonts/static/DynaPuff_Condensed-Medium.ttf');/*memanggil file font eksternalnya di folder nexa*/
+        }
 
         /* Efek blur pada latar belakang */
         .bg-image {
@@ -30,7 +34,7 @@
         }
 
         .text{
-            font-family: "DynaPuff", system-ui;
+            font-family: "Dynapuff-medium";
             font-optical-sizing: auto;
             font-weight: 700;
             font-style: normal;
@@ -39,7 +43,7 @@
         }
 
         .text-next{
-            font-family: "DynaPuff", system-ui;
+            font-family: "Dynapuff-medium";
             font-optical-sizing: auto;
             font-weight: 700;
             font-style: normal;
@@ -47,7 +51,7 @@
             color: white;
         }
         .kotak{
-            font-family: "DynaPuff", system-ui;
+            font-family: "Dynapuff-medium";
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;

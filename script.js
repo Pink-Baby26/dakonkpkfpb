@@ -176,10 +176,11 @@ function drop(event) {
   // Jika grid sudah berisi 2 objek draggable, tampilkan peringatan
   if (existingObjects.length >= 2) {
     Swal.fire({
-      title: 'Penuh!',
-      text: 'Grid ini sudah berisi 2 objek draggable.',
+      title: 'Opsss!!',
+      text: 'Disini sudah terisi angka tersebut!!',
       icon: 'warning',
-      confirmButtonText: 'OK'
+      showConfirmButton: false,
+      timer: 1000
     });
     return;
   }
@@ -194,20 +195,22 @@ function drop(event) {
   if (isKPKCorrect) {
     if (gridValue % draggableValue !== 0) {
       Swal.fire({
-        title: 'Tidak Valid!',
+        title: 'Opsss!!',
         text: `Angka ${gridValue} bukan kelipatan dari ${draggableValue}!`,
         icon: 'error',
-        confirmButtonText: 'OK'
+        showConfirmButton: false,
+        timer: 1000
       });
       return;
     }
   } else if (isFPBCorrect) {
     if (draggableValue % gridValue !== 0) {
       Swal.fire({
-        title: 'Tidak Valid!',
+        title: 'Opsss!!',
         text: `Angka ${draggableValue} bukan faktor dari ${gridValue}!`,
         icon: 'error',
-        confirmButtonText: 'OK'
+        showConfirmButton: false,
+        timer: 1000
       });
       return;
     }
@@ -227,9 +230,10 @@ function drop(event) {
 
   Swal.fire({
     title: 'Berhasil!',
-    text: 'Objek berhasil di-drop.',
+    text: 'Angka Berhasil disimpan',
     icon: 'success',
-    confirmButtonText: 'OK'
+    showConfirmButton: false,
+    timer: 1000
   });
 }
 
@@ -239,8 +243,7 @@ function drop(event) {
 // Tambahkan variabel untuk menyimpan hasil KPK dan FPB
 let currentAnswer = null;
 
-// Fungsi untuk memvalidasi jawaban dan mengubah warna tombol
-// Validasi jawaban pada grid
+
 function validateAnswer(button) {
   // Ambil nilai grid
   const gridValue = parseInt(button.getAttribute('data-grid-value'));
@@ -252,9 +255,10 @@ function validateAnswer(button) {
   if (miniObjects.length < 2) {
     Swal.fire({
       title: 'Belum Lengkap!',
-      text: 'Pastikan 2 objek draggable sudah dijatuhkan di grid ini.',
+      text: 'Jawaban Belum Terisi!!',
       icon: 'error',
-      confirmButtonText: 'OK'
+      showConfirmButton: false,
+      timer: 1000
     });
     return;
   }
@@ -264,18 +268,22 @@ function validateAnswer(button) {
 
   let isValid = false; // Untuk validasi jawaban
   let correctAnswer = null; // Jawaban benar
+  const number1 = document.getElementById('number1').value;
+  const number2 = document.getElementById('number2').value;
+
+  let metode = ""; // Variabel untuk menyimpan metode yang dipilih
 
   if (isKPKCorrect) {
     // Hitung KPK dari angka draggable
     correctAnswer = draggableValues.reduce((acc, value) => lcm(acc, value), 1);
-    
+    metode = "KPK";
     // Periksa apakah nilai grid adalah KPK
     isValid = gridValue === correctAnswer;
 
   } else if (isFPBCorrect) {
     // Hitung FPB dari angka draggable
     correctAnswer = draggableValues.reduce((acc, value) => gcd(acc, value), draggableValues[0]);
-
+    metode = "FPB";
     // Periksa apakah nilai grid adalah FPB
     isValid = gridValue === correctAnswer;
   }
@@ -283,7 +291,7 @@ function validateAnswer(button) {
   // Konfirmasi Jawaban
   Swal.fire({
     title: 'Konfirmasi',
-    text: "Apakah Anda yakin dengan jawaban ini?",
+    text: `Apakah Anda yakin dengan jawaban ini?`,
     icon: 'question',
     showCancelButton: true,
     confirmButtonText: 'Ya',
@@ -292,15 +300,16 @@ function validateAnswer(button) {
     if (result.isConfirmed) {
       if (isValid) {
         button.classList.add('bg-green-500');
-        Swal.fire('Benar!', 'Jawaban Anda benar!', 'success');
+        Swal.fire('Benar!', `Jawaban Anda benar. ${metode} dari ${number1} dan ${number2} adalah ${correctAnswer}.`, 'success');
         document.getElementById('next-btn').classList.remove('hidden');
       } else {
         button.classList.add('bg-red-500');
-        Swal.fire('Salah!', `Jawaban yang benar adalah ${correctAnswer}.`, 'error');
+        Swal.fire('Salah!', `Cek Lagi Jawabannya!!.`, 'error');
       }
     }
   });
 }
+
 
 // Fungsi untuk menghitung KPK
 function lcm(a, b) {
@@ -316,82 +325,6 @@ function gcd(a, b) {
   }
   return a;
 }
-
-
-
-
-
-function drop(event) {
-  event.preventDefault();
-
-  const data = event.dataTransfer.getData("text");
-  const droppedObject = document.getElementById(data);
-
-  const targetButton = event.target;
-
-  // Ambil nilai asli grid dari atribut data
-  const gridValue = parseInt(targetButton.getAttribute('data-grid-value'));
-
-  // Ambil nilai dari objek draggable
-  const draggableValue = parseInt(droppedObject.textContent);
-
-  // Validasi objek draggable terhadap nilai grid
-  if (isKPKCorrect) {
-    if (gridValue % draggableValue !== 0) {
-      Swal.fire({
-        title: 'Tidak Valid!',
-        text: `Angka ${gridValue} bukan kelipatan dari ${draggableValue}!`,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      return;
-    }
-  } else if (isFPBCorrect) {
-    if (draggableValue % gridValue !== 0) {
-      Swal.fire({
-        title: 'Tidak Valid!',
-        text: `Angka ${draggableValue} bukan faktor dari ${gridValue}!`,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      return;
-    }
-  }
-
-  // Periksa apakah objek yang sama sudah ada di tombol ini
-  if (targetButton.querySelector(`#${data}-mini`)) {
-    Swal.fire({
-      title: 'Gagal!',
-      text: 'Objek ini sudah di-drop di tombol ini.',
-      icon: 'warning',
-      confirmButtonText: 'OK'
-    });
-    return;
-  }
-
-  // Tambahkan elemen visual untuk objek draggable
-  const miniObject = document.createElement('div');
-  miniObject.className = `w-4 h-4 rounded-full bg-${droppedObject.classList.contains('bg-red-500') ? 'red' : 'green'}-500 text-white flex items-center justify-center`;
-  miniObject.textContent = draggableValue;
-  miniObject.id = `${data}-mini`; // ID unik untuk pelacakan
-
-  // Posisi acak di dalam tombol
-  miniObject.style.position = 'absolute';
-  miniObject.style.top = `${Math.random() * 50 + 25}%`;
-  miniObject.style.left = `${Math.random() * 50 + 25}%`;
-
-  targetButton.appendChild(miniObject);
-
-  Swal.fire({
-    title: 'Berhasil!',
-    text: 'Objek berhasil di-drop.',
-    icon: 'success',
-    confirmButtonText: 'OK'
-  });
-}
-
-
-
 
 
 function resetGrid() {
@@ -427,25 +360,43 @@ function resetGrid() {
 
 function nextstep() {
   Swal.fire({
-    title: 'Lanjut ke Perhitungan Selanjutnya',
+      title: 'Lanjut ke Perhitungan Selanjutnya',
       text: '',
       icon: 'info',
       confirmButtonText: 'OK'
   }).then((result) => {
-    if (result.isConfirmed) {
-      const gridButtons = document.querySelectorAll('#button-grid button');
-      droppedCount = 0;
-      gridButtons.forEach(button => {
-        const droppedObjects = button.querySelectorAll('.rounded-full');
-        droppedObjects.forEach(object => {
-          button.removeChild(object);
-        });
-        button.classList.remove('bg-green-500', 'bg-red-500');
-        button.classList.add('bg-gray-200', 'hover:bg-gray-300');
-      });
-    }
+      if (result.isConfirmed) {
+          // Reset grid
+          const gridButtons = document.querySelectorAll('#button-grid button');
+          droppedCount = 0;
+          gridButtons.forEach(button => {
+              const droppedObjects = button.querySelectorAll('.rounded-full');
+              droppedObjects.forEach(object => {
+                  button.removeChild(object);
+              });
+              button.classList.remove('bg-green-500', 'bg-red-500');
+              button.classList.add('bg-gray-200', 'hover:bg-gray-300');
+          });
+
+          // Reset draggable objects
+          const draggableContainer = document.getElementById('draggableObjects');
+          while (draggableContainer.firstChild) {
+              draggableContainer.removeChild(draggableContainer.firstChild);
+          }
+          draggableContainer.classList.add('hidden'); // Sembunyikan container
+
+          // Tampilkan tombol dan teks yang relevan
+          document.getElementById('instruction-text').classList.remove('hidden');
+          document.getElementById('pilih-text').classList.add('hidden');
+          document.getElementById('button-grid').classList.add('hidden');
+          document.getElementById('reset-btn').classList.add('hidden');
+
+          // Periksa apakah tombol lanjut perlu direset
+          checkBothCalculations();
+      }
   });
 }
+
 
 function showNextOptions() {
   document.getElementById('next-btn').classList.add('hidden'); // Sembunyikan tombol Lanjut

@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+        @font-face /*perintah untuk memanggil font eksternal*/
+        {
+            font-family: 'Dynapuff-medium'; /*memberikan nama bebas untuk font*/
+            src: url('fonts/static/DynaPuff_Condensed-Medium.ttf');/*memanggil file font eksternalnya di folder nexa*/
+        }
 
         /* Efek blur pada latar belakang */
         .bg-image {
-            background-size: cover;
+            background-image: url("img/Bg2.jpg");
+            background-size: 100vw 100vh;
             background-position: center;
             position: fixed;
             top: 0;
@@ -29,7 +34,7 @@
         }
 
         .text{
-            font-family: "DynaPuff", system-ui;
+            font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 700;
             font-style: normal;
@@ -37,7 +42,7 @@
         }
 
         .text-next{
-            font-family: "DynaPuff", system-ui;
+            font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 700;
             font-style: normal;
@@ -45,7 +50,7 @@
             color: white;
         }
         .kotak{
-            font-family: "DynaPuff", system-ui;
+            font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
@@ -54,7 +59,7 @@
             letter-spacing: 1px;
         }
         .kotak-1{
-            font-family: "DynaPuff", system-ui;
+            font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
@@ -64,7 +69,7 @@
             background-color: rgb(6 182 212);
         }
         .kotak-2{
-            font-family: "DynaPuff", system-ui;
+            font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
@@ -73,13 +78,19 @@
             letter-spacing: 1px;
             background-color: rgb(179, 0, 255);
         }
+
+        @media screen and (max-width: 680px) {
+        .bg-image {
+            background-size: cover;
+        }
+        }
     </style>
 </head>
 <body class="flex flex-col items-center place-content-center min-h-screen">
         <!-- Latar belakang gambar dengan efek blur -->
         <div class="bg-image"></div>
 
-        <h1 class="text text-blue-600 pt-10 underline text-3xl lg:text-5xl md:text-4xl p-5 text-center animate__animated animate__fadeInDownBig" >
+        <h1 class="text text-blue-600 pt-20 text-3xl lg:text-5xl md:text-4xl p-5 text-center animate__animated animate__fadeInDownBig" >
             Materi KPK dan FPB</h1>
 
             <div class="grid grid-cols-1 w-3/4 sm:grid-cols-2 md:grid-cols-3 gap-4 animate__animated animate__fadeInLeftBig">
