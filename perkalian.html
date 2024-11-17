@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @font-face /*perintah untuk memanggil font eksternal*/
+        {
+            font-family: 'Dynapuff-medium'; /*memberikan nama bebas untuk font*/
+            src: url('fonts/static/DynaPuff_Condensed-Medium.ttf');/*memanggil file font eksternalnya di folder nexa*/
+        }
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/Bg2.jpg");
+            background-size: 100vw 100vh;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff-medium";
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff-medium";
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+        .kotak{
+            font-family: "DynaPuff-medium";
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        @media screen and (max-width: 680px) {
+        .bg-image {
+            background-size: cover;
+        }
+        }
+    </style>
+</head>
+<body class="relative overflow-hidden flex flex-col items-center place-content-center min-h-screen">
+        <!-- Latar belakang gambar dengan efek blur -->
+        <div class="bg-image"></div>
+        <!-- Container untuk dua kotak -->
+        <div class="container w-3/4 sm:w-3/4 md:w-1/2 mx-auto">
+            <h1 class="text text-purple-500 text-4xl lg:text-5xl md:text-6xl p-5 text-center animate__animated animate__fadeInDownBig" >
+                Perkalian</h1> 
+            <div class="kotak bg-purple-500 w-full p-6 pr-5 shadow-lg rounded animate__animated animate__fadeInDownBig">
+                <img src="img/perkalian.jpg" class="w-full" alt="">
+            </div>
+        </div>
+        <div class="flex justify-between pt-5 w-3/4 sm:w-3/4 md:w-1/2">
+            <a href="menu.html" class="text-next bg-purple-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+            </a>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>
