@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=""> 
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/Bg2.jpg");
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+        .kotak{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col items-center place-content-center min-h-screen">
+        <!-- Latar belakang gambar dengan efek blur -->
+        <div class="bg-image"></div>
+        
+        <h1 class="text text-blue-500 lg:text-4xl md:text-3xl sm:text-2xl p-5 text-center animate__animated animate__slideInDown" >Langkah-Langkah Penggunaan <br> Media Pembelajaran Dakota</h1>
+        <div class="container w-3/4 flex">
+            <!-- Kotak pertama -->  
+            <div class="kotak bg-blue-500 lg:text-base md:text-sm sm:text-xs p-6 shadow-lg rounded animate__animated animate__slideInLeft">
+                <ul class="pl-5">
+                    <li class="list-decimal p-1">Klik link yang sudah diberikan oleh guru</li>
+                    <li class="list-decimal p-1">Setelah masuk ke halaman web terdapat laman untuk memilih angka/bilangan</li>
+                    <li class="list-decimal p-1">Pilih lah bilangan terlebih dahulu sesuai dengan bilangan yang akan dihitung</li>
+                    <li class="list-decimal p-1">Setelah menentukan bilangan klik oke untuk lanjut menghitung bilangan yg sudah ditentukan menggunakan dakota digital</li>
+                    <li class="list-decimal p-1">⁠Ada 2 mangkok diatas yg berisi bola berwarna merah dan berwarna hijau, bola berwana hijau diartikan sebagai  bilangan pertama dan bola yang berwana merah diartikan sebagai bilangan kedua</li>
+                    <li class="list-decimal p-1">⁠Masukan masing masing bola kepada kotak angka sesuai dengan kelipatan atau faktor dari bilangan yang sudah ditentukan </li>
+                    <li class="list-decimal p-1">⁠Setelah itu cari lah kotak angka yang terdapat bola yang berwarna merag dan berwarna hijau </li>
+                    <li class="list-decimal p-1">Pilihlah angka mana yang termasuk kedalam KPK atau FPB pada bilangan yang telah ditentukan sebelumnya</li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex justify-between w-3/4 mt-10">
+            <a href="menu.html" class="text-next bg-blue-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+            </a>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>

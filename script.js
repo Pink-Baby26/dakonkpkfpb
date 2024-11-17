@@ -18,20 +18,23 @@ function start() {
 
   if (number1 === '' || number2 === '' || number1 == 0 || number2 == 0) {
     Swal.fire({
-      title: 'Error!',
-      text: 'Masukkan angka terlebih dahulu',
+      title: 'Jangan Lupa !!',
+      text: 'Masukkin angkanya dulu',
       icon: 'error',
-      confirmButtonText: 'OK'
+      showConfirmButton: false,
+      timer: 1000
     });
   } else {
     Swal.fire({
-      title: 'Input Values',
-      text: `Nilai pertama: ${number1}, Nilai kedua: ${number2}`,
+      title: 'Angka Tersimpan!',
+      text: `Nilai Pertama: ${number1} dan Nilai kedua: ${number2}`,
       icon: 'info',
-      confirmButtonText: 'OK'
+      showConfirmButton: false,
+      timer: 1000
     });
     document.getElementById('action-buttons').classList.remove('hidden');
     document.getElementById('input-section').classList.add('hidden');
+    document.getElementById('btn-back').classList.add('hidden');
     
     // Show instruction text
     document.getElementById('instruction-text').classList.remove('hidden');
@@ -41,15 +44,20 @@ function start() {
 function calculateKPK() {
   const number1 = parseInt(document.getElementById('number1').value);
   const number2 = parseInt(document.getElementById('number2').value);
+
+  // Perhitungan KPK
   const kpkValue = lcm(number1, number2);
   populateGrid(kpkValue);
-  document.getElementById('fpb-btn').classList.add('hidden');
+
+  // Atur status untuk KPK
+  isKPKCorrect = true;
+  isFPBCorrect = false;
+
   displayCirclesAndGrid();
   generateDraggableObjects(number1, number2);
-  
-  // Hide instruction text
+
+  document.getElementById('fpb-btn').classList.add('hidden');
   document.getElementById('instruction-text').classList.add('hidden');
-  isKPKCorrect = true;
   checkBothCalculations();
   document.getElementById('reset-btn').classList.remove('hidden');
   document.getElementById('pilih-text').classList.remove('hidden');
@@ -59,21 +67,26 @@ function calculateKPK() {
 function calculateFPB() {
   const number1 = parseInt(document.getElementById('number1').value);
   const number2 = parseInt(document.getElementById('number2').value);
+
+  // Perhitungan FPB
   const fpbValue = gcd(number1, number2);
   populateGrid(fpbValue);
-  document.getElementById('kpk-btn').classList.add('hidden');
+
+  // Atur status untuk FPB
+  isFPBCorrect = true;
+  isKPKCorrect = false;
+
   displayCirclesAndGrid();
   generateDraggableObjects(number1, number2);
-  
-  // Hide instruction text
+
+  document.getElementById('kpk-btn').classList.add('hidden');
+
   document.getElementById('instruction-text').classList.add('hidden');
-  isFPBCorrect = true;
   checkBothCalculations();
   document.getElementById('reset-btn').classList.remove('hidden');
   document.getElementById('pilih-text').classList.remove('hidden');
   document.getElementById('button-grid').classList.remove('hidden');
 }
-
 
 
 function lcm(a, b) {
@@ -89,30 +102,31 @@ function gcd(a, b) {
   return a;
 }
 
-function populateGrid(value) {
+function populateGrid() {
   const grid = document.getElementById('button-grid');
-  grid.innerHTML = '';
+  grid.innerHTML = ''; // Kosongkan grid sebelumnya
 
-  for (let i = 1; i <= 36; i++) {
+  for (let i = 1; i <= 50; i++) {
     const button = document.createElement('button');
-    button.className = 'bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-full relative';
+    button.className = 'text bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-full relative';
+    button.textContent = i; // Tampilkan angka grid
+    button.setAttribute('data-grid-value', i); // Simpan nilai asli grid
     button.ondrop = drop;
     button.ondragover = allowDrop;
 
-    if (i === value) {
-      button.textContent = value;
-    } else {
-      button.textContent = i;
-    }
+    // Tambahkan event klik untuk validasi jawaban
+    button.onclick = () => validateAnswer(button);
+
     grid.appendChild(button);
   }
 }
 
 
+
 // Fungsi untuk membuat objek draggable dari input number
 function generateDraggableObjects(number1, number2) {
   const draggableContainer = document.getElementById('draggableObjects');
-  draggableContainer.innerHTML = ''; // Kosongkan objek sebelumnya
+   // Kosongkan objek sebelumnya
   draggableContainer.classList.remove('hidden'); // Tampilkan container
 
   // Membuat objek draggable dari input 1
@@ -120,7 +134,7 @@ function generateDraggableObjects(number1, number2) {
   object1.id = 'draggable1';
   object1.draggable = true;
   object1.ondragstart = drag;
-  object1.className = 'w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white';
+  object1.className = 'text w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white';
   object1.textContent = `${number1}`; // Menggunakan teks input1
   draggableContainer.appendChild(object1);
 
@@ -129,7 +143,7 @@ function generateDraggableObjects(number1, number2) {
   object2.id = 'draggable2';
   object2.draggable = true;
   object2.ondragstart = drag;
-  object2.className = 'w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white';
+  object2.className = 'text w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white';
   object2.textContent = `${number2}`; // Menggunakan teks input2
   draggableContainer.appendChild(object2);
 }
@@ -150,133 +164,235 @@ function allowDrop(event) {
 
 function drop(event) {
   event.preventDefault();
+
   const data = event.dataTransfer.getData("text");
   const droppedObject = document.getElementById(data);
 
   const targetButton = event.target;
 
-  // Periksa apakah objek yang dijatuhkan sudah ada di tombol target
-  if (targetButton.querySelector(`#${data}-mini`)) {
-    alert("Objek ini sudah di-drop di sini.");
-    return; // Mencegah penempatan duplikat
+  // Ambil elemen draggable yang sudah ada di grid ini
+  const existingObjects = targetButton.querySelectorAll('.rounded-full');
+
+  // Jika grid sudah berisi 2 objek draggable, tampilkan peringatan
+  if (existingObjects.length >= 2) {
+    Swal.fire({
+      title: 'Penuh!',
+      text: 'Grid ini sudah berisi 2 objek draggable.',
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    });
+    return;
   }
 
-  // Buat miniObject untuk merepresentasikan objek yang dijatuhkan
-  const miniObject = document.createElement("div");
-  miniObject.className = `w-4 h-4 rounded-full bg-${droppedObject.classList.contains('bg-red-500') ? 'red' : 'green'}-500 text-white flex items-center justify-center`;
-  miniObject.textContent = droppedObject.textContent;
-  miniObject.id = `${data}-mini`; // ID unik untuk pelacakan
+  // Ambil nilai asli grid dari atribut data
+  const gridValue = parseInt(targetButton.getAttribute('data-grid-value'));
 
-  // Penempatan acak di dalam tombol
+  // Ambil nilai dari objek draggable
+  const draggableValue = parseInt(droppedObject.textContent);
+
+  // Validasi objek draggable terhadap nilai grid
+  if (isKPKCorrect) {
+    if (gridValue % draggableValue !== 0) {
+      Swal.fire({
+        title: 'Tidak Valid!',
+        text: `Angka ${gridValue} bukan kelipatan dari ${draggableValue}!`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  } else if (isFPBCorrect) {
+    if (draggableValue % gridValue !== 0) {
+      Swal.fire({
+        title: 'Tidak Valid!',
+        text: `Angka ${draggableValue} bukan faktor dari ${gridValue}!`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  }
+
+  // Tambahkan elemen visual untuk objek draggable
+  const miniObject = document.createElement('div');
+  miniObject.className = `w-4 h-4 rounded-full bg-${droppedObject.classList.contains('bg-red-500') ? 'red' : 'green'}-500 text-white flex items-center justify-center`;
+  miniObject.textContent = draggableValue;
+
+  // Posisi acak di dalam tombol
   miniObject.style.position = 'absolute';
   miniObject.style.top = `${Math.random() * 50 + 25}%`;
   miniObject.style.left = `${Math.random() * 50 + 25}%`;
 
   targetButton.appendChild(miniObject);
-  
-  // Tingkatkan penghitung objek yang dijatuhkan
-  droppedCount++;
+
+  Swal.fire({
+    title: 'Berhasil!',
+    text: 'Objek berhasil di-drop.',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  });
 }
+
+
+
 
 // Tambahkan variabel untuk menyimpan hasil KPK dan FPB
 let currentAnswer = null;
 
-// Modifikasi fungsi populateGrid untuk menambahkan event listener
-function populateGrid(value) {
-  const grid = document.getElementById('button-grid');
-  grid.innerHTML = '';
-  currentAnswer = value; // Simpan jawaban saat ini untuk pengecekan
-
-  for (let i = 1; i <= 36; i++) {
-    const button = document.createElement('button');
-    button.className = 'bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded relative';
-    button.ondrop = drop;
-    button.ondragover = allowDrop;
-    button.onclick = () => validateAnswer(i, button); // Tambahkan event listener onclick
-
-    button.textContent = i;
-    grid.appendChild(button);
-  }
-}
-
 // Fungsi untuk memvalidasi jawaban dan mengubah warna tombol
-function validateAnswer(selectedValue, button) {
-  // Periksa apakah kedua objek draggable telah dijatuhkan
-  if (droppedCount < 2) {
+// Validasi jawaban pada grid
+function validateAnswer(button) {
+  // Ambil nilai grid
+  const gridValue = parseInt(button.getAttribute('data-grid-value'));
+
+  // Ambil semua elemen kecil dari grid ini
+  const miniObjects = button.querySelectorAll('.rounded-full');
+
+  // Pastikan ada 2 elemen yang dijatuhkan
+  if (miniObjects.length < 2) {
     Swal.fire({
-      title: 'Error!',
-      text: 'Isi Number dengan Jawaban Anda',
+      title: 'Belum Lengkap!',
+      text: 'Pastikan 2 objek draggable sudah dijatuhkan di grid ini.',
       icon: 'error',
       confirmButtonText: 'OK'
     });
-    return; // Keluar dari fungsi lebih awal
+    return;
   }
 
-  const isCorrect = selectedValue === currentAnswer;
+  // Ambil nilai dari objek draggable
+  const draggableValues = Array.from(miniObjects).map(obj => parseInt(obj.textContent));
 
+  let isValid = false; // Untuk validasi jawaban
+  let correctAnswer = null; // Jawaban benar
+
+  if (isKPKCorrect) {
+    // Hitung KPK dari angka draggable
+    correctAnswer = draggableValues.reduce((acc, value) => lcm(acc, value), 1);
+    
+    // Periksa apakah nilai grid adalah KPK
+    isValid = gridValue === correctAnswer;
+
+  } else if (isFPBCorrect) {
+    // Hitung FPB dari angka draggable
+    correctAnswer = draggableValues.reduce((acc, value) => gcd(acc, value), draggableValues[0]);
+
+    // Periksa apakah nilai grid adalah FPB
+    isValid = gridValue === correctAnswer;
+  }
+
+  // Konfirmasi Jawaban
   Swal.fire({
     title: 'Konfirmasi',
-    text: "Apakah Jawaban Sudah Yakin Benar?",
+    text: "Apakah Anda yakin dengan jawaban ini?",
     icon: 'question',
     showCancelButton: true,
     confirmButtonText: 'Ya',
     cancelButtonText: 'Tidak'
   }).then((result) => {
     if (result.isConfirmed) {
-      if (isCorrect) {
-        button.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+      if (isValid) {
         button.classList.add('bg-green-500');
-        Swal.fire({
-          title: 'Benar!',
-          text: 'Jawaban Benar!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        }).then(() => {
-          document.getElementById('next-btn').classList.remove('hidden'); // Tampilkan tombol Lanjut
-        });
+        Swal.fire('Benar!', 'Jawaban Anda benar!', 'success');
+        document.getElementById('next-btn').classList.remove('hidden');
       } else {
-        button.classList.remove('bg-gray-200', 'hover:bg-gray-300');
         button.classList.add('bg-red-500');
-        Swal.fire({
-          title: 'Salah!',
-          text: 'Jawabannya Salah!',
-          icon: 'error',
-          confirmButtonText: 'OK'
-        });
+        Swal.fire('Salah!', `Jawaban yang benar adalah ${correctAnswer}.`, 'error');
       }
     }
   });
 }
 
+// Fungsi untuk menghitung KPK
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+// Fungsi untuk menghitung FPB
+function gcd(a, b) {
+  while (b !== 0) {
+    let temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+
+
+
+
 function drop(event) {
   event.preventDefault();
+
   const data = event.dataTransfer.getData("text");
   const droppedObject = document.getElementById(data);
 
   const targetButton = event.target;
 
-  // Periksa apakah objek yang dijatuhkan sudah ada di tombol target
-  if (targetButton.querySelector(`#${data}-mini`)) {
-    alert("Objek ini sudah di-drop di sini.");
-    return; // Mencegah penempatan duplikat
+  // Ambil nilai asli grid dari atribut data
+  const gridValue = parseInt(targetButton.getAttribute('data-grid-value'));
+
+  // Ambil nilai dari objek draggable
+  const draggableValue = parseInt(droppedObject.textContent);
+
+  // Validasi objek draggable terhadap nilai grid
+  if (isKPKCorrect) {
+    if (gridValue % draggableValue !== 0) {
+      Swal.fire({
+        title: 'Tidak Valid!',
+        text: `Angka ${gridValue} bukan kelipatan dari ${draggableValue}!`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  } else if (isFPBCorrect) {
+    if (draggableValue % gridValue !== 0) {
+      Swal.fire({
+        title: 'Tidak Valid!',
+        text: `Angka ${draggableValue} bukan faktor dari ${gridValue}!`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
   }
 
-  // Buat miniObject untuk merepresentasikan objek yang dijatuhkan
-  const miniObject = document.createElement("div");
+  // Periksa apakah objek yang sama sudah ada di tombol ini
+  if (targetButton.querySelector(`#${data}-mini`)) {
+    Swal.fire({
+      title: 'Gagal!',
+      text: 'Objek ini sudah di-drop di tombol ini.',
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    });
+    return;
+  }
+
+  // Tambahkan elemen visual untuk objek draggable
+  const miniObject = document.createElement('div');
   miniObject.className = `w-4 h-4 rounded-full bg-${droppedObject.classList.contains('bg-red-500') ? 'red' : 'green'}-500 text-white flex items-center justify-center`;
-  miniObject.textContent = droppedObject.textContent;
+  miniObject.textContent = draggableValue;
   miniObject.id = `${data}-mini`; // ID unik untuk pelacakan
 
-  // Penempatan acak di dalam tombol
+  // Posisi acak di dalam tombol
   miniObject.style.position = 'absolute';
   miniObject.style.top = `${Math.random() * 50 + 25}%`;
   miniObject.style.left = `${Math.random() * 50 + 25}%`;
 
   targetButton.appendChild(miniObject);
-  
-  // Tingkatkan penghitung objek yang dijatuhkan
-  droppedCount++;
+
+  Swal.fire({
+    title: 'Berhasil!',
+    text: 'Objek berhasil di-drop.',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  });
 }
+
+
+
+
 
 function resetGrid() {
   Swal.fire({
@@ -347,10 +463,15 @@ function showNextOptions() {
 }
 
 function checkBothCalculations() {
+  // Jika kedua tombol KPK dan FPB sudah ditekan
   if (isKPKCorrect && isFPBCorrect) {
-    const nextButton = document.getElementById('next-btn');
-    nextButton.textContent = 'Lanjut';
-    nextButton.onclick = () => location.reload(); // Fungsi untuk me-refresh halaman
-    nextButton.classList.remove('hidden');
+      const nextButton = document.getElementById('next-btn');
+      nextButton.textContent = 'Refresh'; // Ubah teks tombol menjadi Refresh
+      nextButton.onclick = () => location.reload(); // Tambahkan fungsi refresh halaman
+      nextButton.classList.remove('hidden'); // Tampilkan tombol
   }
 }
+
+
+
+

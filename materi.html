@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=""> 
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+        .kotak{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+        }
+        .kotak-1{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+            background-color: rgb(6 182 212);
+        }
+        .kotak-2{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+            background-color: rgb(179, 0, 255);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center place-content-center min-h-screen">
+        <!-- Latar belakang gambar dengan efek blur -->
+        <div class="bg-image"></div>
+
+        <h1 class="text text-blue-600 pt-10 underline text-3xl lg:text-5xl md:text-4xl p-5 text-center animate__animated animate__fadeInDownBig" >
+            Materi KPK dan FPB</h1>
+
+            <div class="grid grid-cols-1 w-3/4 sm:grid-cols-2 md:grid-cols-3 gap-4 animate__animated animate__fadeInLeftBig">
+                <div class="kotak-1 text-white p-6 rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Kelipatan Bilangan</h2>
+                    <p class="text-xs md:text-sm underline">Kelipatan dari suatu bilangan adalah hasil 
+                        perkalian bilangan tersebut dengan bilangan asli
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>Tentukan kelipatan dari 4!</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        1 x 4 = 4 <br>
+                        2 x 4 = 4 + 4 = 8 <br>
+                        3 x 4 = 4 + 4 + 4 = 12 <br>
+                        4x 4 = 4 + 4 + 4 + 4 = 16, dan seterusnya. <br>
+                        Jadi, kelipatan dari 4 adalah 4,8,12,16,....
+                    </p></div>
+                <div class="kotak bg-green-500 text-white p-6 rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Faktor Bilangan</h2>
+                    <p class="text-xs md:text-sm underline">Faktor dari suatu bilangan adalah semua bilangan yang 
+                        dapat membagi habis tanpa sisa  bilangan tersebut. Misalnya kita punya bilangan 10, maka faktornya
+                        adalah 1, 2, 5, dan 10. Karena bilangan tersebut bisa membagi bilangan 10
+                        sampai habis.
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>Tentukan faktor dari 18 dan 20!</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        <img src="img/faktor_bilangan.png" alt="">
+                    </p>
+                </div>
+                <div class="kotak bg-red-500 text-white p-6 rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Bilangan Prima</h2>
+                    <p class="text-xs md:text-sm underline">Bilangan prima adalah bilangan yang mempunyai dua faktor, 
+                        yaitu 1 dan bilangan itu sendiri. Contoh bilangan prima  : 2, 3, 5, 7, 11, 13, ....
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Bilangan 1 bukan bilangan prima karena 1 hanya mempunyai satu pembagi yaitu 1. 
+                        Bilangan 9 bukan bilangan prima karena 9 mempunyai 3 faktor, yaitu 1, 3, dan 9.
+                    </p>
+                </div>
+                <div class="kotak bg-yellow-500 text-white p-6 rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Faktor Prima</h2>
+                    <p class="text-xs md:text-sm underline">Faktor prima adalah faktor suatu bilangan yang merupakan bilangan prima.
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside">
+                        <li>Faktor dari 20 adalah 1, 2, 4, 5, 10 dan 20</li>
+                        <li>Faktor prima dari 20 adalah 2 dan 5.</li>
+                    </ul>
+                </div>
+                <div class="kotak bg-purple-500 text-white p-6  rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Faktorisasi Prima</h2>
+                    <p class="text-xs md:text-sm underline">Faktorisasi prima adalah cara menyatakan suatu bilangan 
+                        sebagai hasil kali bilangan prima. Koefesien suatu bilangan dapat ditentukan dengan menggunakan 
+                        pohon faktor.
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>Tentukan faktorisasi prima dari 24!</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        <img src="img/faktor_prima.png" alt="">
+                    </p>
+                </div>
+                <div class="kotak bg-indigo-500 text-white p-6 rounded-lg">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Kelipatan Persekutuan</h2>
+                    <p class="text-xs md:text-sm underline">Kelipatan persekutuan adalah kelipatan setara (konjungsi) 
+                        dari dua bilangan atau lebih. Kelipatan persekutuan dapat ditentukan dengan cara menuliskan 
+                        kelipatan setiap bilangan kemudian melingkari kelipatan bilangan yang  sama (berhubungan).
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        <img src="img/kelipatan_persekutuan.png" alt="">
+                    </p>
+                </div>
+                <div class="kotak bg-pink-500 text-white p-6 rounded-lg col-span-1 sm:col-span-2 md:col-span-3">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Faktor Persekutuan</h2>
+                    <p class="text-xs md:text-sm underline">Faktor persekutuan merupakan faktor yang sama ( bersekutu )
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>Tentukan faktor persekutuan dari 18 dan 24!</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        <img src="img/faktor_persekutuan.png" class="md:w-2/5" alt="">
+                    </p>
+                </div>
+                <div class="kotak bg-blue-500 text-white p-6 rounded-lg sm:col-span-2 md:col-span-3">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">KPK dan FPB dari Dua Bilangan</h2>
+                    <ul class="list-disc list-inside underline text-xs md:text-sm">
+                        <li>Kelipatan persekutuan terkecil (KPK) adalah kelipatan persekutuan dari dua bilangan 
+                            yang mempunyai nilai  terkecil diantara kelipatan persekutuan lainnya dan dapat dibagi 
+                            habis oleh dua bilangan atau lebih.</li>
+                            <li>Faktor persekutuan terbesar (FPB) adalah koefesien persekutuan dari dua bilangan yang 
+                                mempunyai  nilai terbesar di antara faktor persekutuan lainnya dan dapat membagi habis dua 
+                                bilangan atau lebih tanpa sisa.</li>
+                    </ul>
+                    <br>
+                    <p class="text-xs md:text-sm">Cara menentukan KPK dan FPB dapat dilakukan dengan pohon 
+                        faktor atau teknik sengkedan : 
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh:
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>Tentukan KPK dan FPB dari 30 dan 42!</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+
+                <div class="grid grid-cols-1 w-full md:grid-cols-1 lg:grid-cols-2 gap-4 p-2 ">
+                    <div class="bg-blue-400 p-4 text-white rounded-lg sm:col-span-2 md:col-span-1">
+                        <p class="text-xs md:text-sm">
+                            Menggunakan pohon faktor
+                        </p>
+                        <p class="text-xs md:text-sm">
+                            <img src="img/pohon_faktor.png" alt="">
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-400 text-white p-4 rounded-lg sm:col-span-2 md:col-span-1">
+                        <p class="text-xs md:text-sm">
+                            Menggunakan teknik sengkedan :
+                        </p>
+                    <p class="text-xs md:text-sm">
+                        <img src="img/teknik_sengkeden.png" alt="">
+                    </p>
+                    <p class="text-xs md:text-sm">*Lingkarilah bilangan prima yang membagi habis kedua bilangan.</p>
+                    </div>
+                </div>
+        
+                </div>
+                <div class="kotak-2 text-white p-6 rounded-lg sm:col-span-2 md:col-span-3">
+                    <h2 class="text-base sm:text-2xl font-semibold text-left">Pemecahan Masalah yang Berkaitan dengan KPK dan FPB</h2>
+                    <p class="text-xs md:text-sm underline">Permasalahan sehari-hari yang berkaitan dengan KPK biasanya sering 
+                        berisi tentang  peristiwa  yang terjadi secara bersamaan dan berulang, sedangkan Konsep FPB sangat berguna 
+                        dalam menyelesaikan berbagai macam masalah sehari-hari, terutama yang berkaitan dengan pembagian yang merata.
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh Soal KPK:
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        Andi mengunjungi perpustakaan setiap 4 hari sekali, sedangkan Budi setiap 6 hari sekali. 
+                        Jika mereka bertemu di perpustakaan pada hari Senin, pada hari apa mereka akan bertemu lagi di perpustakaan?
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        Penyelesaian :
+                    </p>
+                    <ul class="list-disc list-inside text-xs md:text-sm">
+                        <li>mencari kelipatan dari 4 dan 6:</li>
+                        <p>4 = 4,8,12,16,20,24,…..<br>
+                            6 = 6,12,18,24,30,36,….<br>
+                            KPK dari 4 dan 6 adalah 12 </p>
+                        <li>Jika hari ini Senin, maka mereka akan bertemu lagi pada hari Senin + 12 hari = Sabtu</li>
+                    </ul>
+                    <p class="text-xs md:text-sm">
+                        “Jadi, Mereka akan bertemu lagi di perpustakaan pada hari sabtu”
+                    </p>
+                    <br>
+                    <p class="text-xs md:text-sm">
+                        Contoh Soal FPB:
+                    </p>
+                    <p class="text-xs md:text-sm">
+                        Bu Ani memiliki 24 buah apel dan 36 buah jeruk. Bu Ani ingin membagi buah-buahan tersebut ke 
+                        dalam beberapa keranjang dengan jumlah apel dan jeruk di setiap keranjang sama banyak. Berapa 
+                        banyak keranjang yang dibutuhkan Bu Ani?
+                    </p>
+                </div>
+              </div>
+
+            </div>
+            <div class="flex justify-normal w-3/4 mt-10 pb-10">
+                <a href="menu.html" class="text-next bg-blue-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                    <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+                </a>
+            </div>
+        <script src="script.js"></script>
+</body>
+</html>

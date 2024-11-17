@@ -1,92 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dakon KPK dan FPB</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/bg-cover.jpg");
+            background-size: auto ;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+
+    </style>
 </head>
-<body class="flex justify-center min-h-screen bg-[#e0dcd3]">
-  <div>
-  <h1 class="p-8 text-4xl font-extrabold leading-none tracking-tight text-[#d3b18a ] md:text-5xl lg:text-6xl dark:text-[#d3b18a]">DAKON KPK DAN FPB</h1>
-  <div class="flex flex-col items-center space-y-6">
-    <div id="input-section" class="flex flex-col items-center space-y-6">
-      <!-- Input Number 1 -->
-      <div class="flex items-center space-x-2">
-        <h3 class="text-black font-bold">Angka Pertama</h3>
-        <button onclick="decrement('number1')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
-          -
-        </button>
-        <input id="number1" type="number" value="0" min="0" class="w-10 text-right font-bold text-lg bg-[#e0dcd3] rounded">
-        <button onclick="increment('number1')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
-          +
-        </button>
-      </div>
+<body class="relative overflow-hidden flex items-center justify-center min-h-screen">
+    <!-- Latar belakang gambar dengan efek blur -->
+    <div class="bg-image"></div>
+
+    <!-- Container Utama -->
+    <div class="p-8 sm:p-10 lg:p-12">
+        <h1 class="text text-blue-300 text-3xl text-center sm:text-8xl md:text-9xl font-bold mb-4 md:mb-6 animate__animated animate__fadeInDownBig">
+            DAKOTA 
+        </h1>
+        <h1 class="text text-blue-300 text-1xl text-center sm:text-3xl md:text-6xl font-bold text-gray-800 mb-4 md:mb-6 animate__animated animate__fadeInLeftBig">
+            (DAKON MATEMATIKA)
+        </h1>
+        <h1 class="text text-red-400 text-base text-center sm:text-2xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6 animate__animated animate__fadeInLeftBig">
+            KPK DAN FPB
+        </h1>
+    </div>
+
+    <script>
+    let touchStartX = 0; // Titik awal sentuhan X
+    let touchEndX = 0;   // Titik akhir sentuhan X
+
+    // Fungsi untuk mendeteksi awal sentuhan
+    function handleTouchStart(event) {
+        touchStartX = event.changedTouches[0].screenX;
+    }
+
+    // Fungsi untuk mendeteksi akhir sentuhan
+    function handleTouchEnd(event) {
+        touchEndX = event.changedTouches[0].screenX;
+        handleGesture();
+    }
+
+    // Fungsi untuk memproses gerakan geser
+    function handleGesture() {
+        if (touchEndX < touchStartX + 50) { // Jika geser ke kanan lebih dari 50px
+            window.location.href = 'menu.html';
+        }
+    }
+
+    // Menambahkan event listener untuk elemen <body>
+    document.body.addEventListener('touchstart', handleTouchStart, false);
+    document.body.addEventListener('touchend', handleTouchEnd, false);
+
+        document.addEventListener('keydown', function(event) {
+            // Periksa jika tombol yang ditekan adalah "Enter"
+            if (event.key === 'Enter') {
+                // Arahkan ke halaman menu.html
+                window.location.href = 'menu.html';
+            }
+        });
+    </script>
     
-      <!-- Input Number 2 -->
-      <div class="flex items-center space-x-2">
-        <h3 class="text-black font-bold">Angka Pertama</h3>
-        <button onclick="decrement('number2')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
-          -
-        </button>
-        <input id="number2" type="number" value="0" min="0" class="w-10 text-right font-bold text-lg bg-[#e0dcd3] rounded">
-        <button onclick="increment('number2')" class="bg-[#d3b18a] text-black font-bold px-3 py-1 rounded hover:bg-[#b99a76] hover:text-white">
-          +
-        </button>
-      </div>
-    
-      <!-- Tombol Mulai -->
-      <button onclick="start()" class="bg-[#d3b18a] text-black font-bold min-w-full py-2 rounded hover:bg-[#b99a76] hover:text-white">
-        Mulai
-      </button>
-    </div>    
-
-    <!-- KPK and FPB Buttons (Initially Hidden) -->
-    <div id="action-buttons" class="items-center space-y-2 mt-4 hidden">
-      <div id="instruction-text" class="text-black flex justify-center font-bold hidden">
-        Pilih Perhitungan Yang Akan Digunakan :
-      </div>
-      <div id="pilih-text" class="text-black flex justify-center font-bold hidden">
-        Perhitungan Yang Dipilih :
-      </div>
-      <div class="flex justify-around w-80 h-10">
-      <button onclick="calculateKPK()" id="kpk-btn" class="bg-[#d3b18a] text-black font-bold px-4 py-2 rounded hover:bg-[#b99a76] hover:text-white">
-        KPK
-      </button>
-      <button onclick="calculateFPB()" id="fpb-btn" class="bg-[#d3b18a] text-black font-bold px-4 py-2 rounded hover:bg-[#b99a76] hover:text-white">
-        FPB
-      </button>
-    </div>
-    </div>
-
-
-    <!-- Objek draggable yang akan dibuat berdasarkan input number (disembunyikan awalnya) -->
-  <div id="draggableObjects" class="flex space-x-4 mb-4 hidden">
-    <!-- Objek draggable akan diisi menggunakan JavaScript -->
-  </div>
-
-    <!-- Circles and 6x6 Grid (Initially Hidden) -->
-    <div id="output-section" class="flex flex-col items-center space-y-6 mt-6 hidden">
-    </div>    
-
-      <!-- 6x6 Button Grid -->
-      <div id="button-grid" class="grid grid-cols-6 gap-2 rounded-full">
-        <!-- Buttons will be inserted here by JavaScript -->
-      </div>
-      <div class="flex justify-between w-80 h-10">
-      <button id="reset-btn" onclick="resetGrid()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hidden">
-        Reset
-      </button>
-
-      <button id="next-btn" onclick="showNextOptions()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hidden">
-        Lanjut
-      </button>
-    </div>
-    </div>
-  </div>
-</div>
-
-  <script src="script.js"></script>
 </body>
 </html>

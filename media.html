@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Pembelajaran Dakon KPK dan FPB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+    /* Efek blur pada latar belakang */
+    .bg-image {
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: auto;
+    }
+    .bg-grid {
+        background-image: url("img/bg-grid.jpg");
+        padding: 15px;
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+    }
+    /* Animasi untuk tombol */
+    .btn-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+  </style>
+</head>
+<body class="relative overflow-auto flex flex-col items-center place-content-center min-h-screen p-20">
+  <div class="bg-image"></div>
+  <div>
+  <h1 class="p-8 text text-3xl text-blue-500 md:text-5xl text-[#d3b18a] text-center animate__animated animate__fadeInLeftBig">DAKON KPK DAN FPB</h1>
+  <div class="flex flex-col items-center space-y-6">
+    <div id="input-section" class="flex flex-col items-center space-y-6">
+      <!-- Input Number 1 -->
+      <div class="flex items-center space-x-2 min-w-full flex justify-between">
+        <h3 class="text text-black">Angka Pertama</h3>
+        <button onclick="decrement('number1')" class="text bg-blue-500 text-white inline-block font-semibold w-8 h-8 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+          -
+        </button>
+        <input id="number1" type="text" disabled value="2" min="0" class="text w-10 text-center font-bold text-lg">
+        <button onclick="increment('number1')" class="text bg-blue-500 text-white inline-block font-semibold w-8 h-8 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+          +
+        </button>
+      </div>
+    
+      <!-- Input Number 2 -->
+      <div class="flex items-center space-x-2 min-w-full flex">
+        <h3 class="text text-black mr-5">Angka Kedua</h3>
+        <button onclick="decrement('number2')" class="text bg-blue-500 text-white inline-block font-semibold w-8 h-8 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+          -
+        </button>
+        <input id="number2" type="text" disabled value="4" min="0" class="text w-10 text-center font-bold text-lg">
+        <button onclick="increment('number2')" class="text bg-blue-500 text-white inline-block font-semibold w-8 h-8 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+          +
+        </button>
+      </div>
+    
+      <!-- Tombol Mulai -->
+      <button onclick="start()" class="text bg-blue-500 text-white font-bold min-w-full py-2 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+        MULAI
+      </button>
+      <a href="menu.html" id="btn-back" class="text bg-blue-500 text-center text-white font-bold min-w-full py-2 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+        KEMBALI
+      </a>
+    </div>    
+
+    <!-- KPK and FPB Buttons (Initially Hidden) -->
+    <div id="action-buttons" class="items-center space-y-2 mt-4 mb-4 hidden animate__animated animate__fadeInLeftBig">
+      <div id="instruction-text" class="text text-blue-500 text-lg flex justify-center font-bold hidden">
+        Pilih Perhitungan Yang Akan Digunakan :
+      </div>
+      <div id="pilih-text" class="text text-blue-500 mb-5 hidden flex justify-center font-bold animate__animated animate__fadeInLeftBig">
+        Perhitungan Yang Dipilih :
+      </div>
+      <div class="text flex justify-around w-full pt-5 animate__animated animate__fadeInLeftBig">
+      <button onclick="calculateKPK()" id="kpk-btn" class="bg-blue-500 text-white font-bold px-4 py-2 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+        KPK
+      </button>
+      <button onclick="calculateFPB()" id="fpb-btn" class="bg-blue-500 text-white font-bold px-4 py-2 rounded-md btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+        FPB
+      </button>
+    </div>
+    </div>
+
+
+    <!-- Objek draggable yang akan dibuat berdasarkan input number (disembunyikan awalnya) -->
+  <div id="draggableObjects" class="flex space-x-4 mb-4 justify-between w-1/4 hidden animate__animated animate__fadeInLeftBig">
+    
+  </div>
+
+    <!-- Circles and 6x6 Grid (Initially Hidden) -->
+    <div id="output-section" class="flex flex-col items-center space-y-6 mt-6 hidden animate__animated animate__fadeInLeftBig">
+    </div>    
+
+      <!-- 6x6 Button Grid -->
+      <div id="button-grid" class="bg-grid grid grid-cols-10 hidden gap-4 animate__animated animate__fadeInLeftBig">
+        <!-- Buttons will be inserted here by JavaScript -->
+      </div>
+      <div class="flex justify-between w-80 h-10">
+      <button id="reset-btn" onclick="resetGrid()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 hidden">
+        Reset
+      </button>
+
+      <button id="next-btn" onclick="showNextOptions()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hidden">
+        Lanjut
+      </button>
+    </div>
+    </div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

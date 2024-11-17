@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/Bg2.jpg");
+            background-size: 100vw 100vh;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: rgb(146 64 14);
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+        .kotak{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        @media screen and (max-width: 680px) {
+        .bg-image {
+            background-size: cover;
+        }
+        }
+
+    </style>
+</head>
+<body class="relative overflow-hidden flex flex-col items-center min-w-150 place-content-center min-h-screen">
+        <!-- Latar belakang gambar dengan efek blur -->
+        <div class="bg-image"></div>
+        <!-- Container untuk dua kotak -->
+        <div class="container w-3/4 mx-auto flex flex-col md:flex-row gap-10">
+            <!-- Kotak pertama -->  
+            <div class="kotak bg-green-500 w-full md:w-1/2 p-6 pr-5 text-center shadow-lg rounded animate__animated animate__fadeInDownBig">
+                <h2 class="text-2xl font-semibold pb-4">Capaian Pembelajaran (CP)</h2>
+                <p class="text-justify">Pada akhir fase C, peserta didik dapat menunjukkan pemahaman dan intuisi bilangan (number sense) 
+                    pada bilangan cacah dengan 1.000.000. Mereka dapat melakukan operasi aritmetika pada bilangan cacah sampai 
+                    100.000. Mereka dapat membandingkan dan mengurutkan berbagai pecahan, melakukan operasi penjumlahan dan 
+                    pengurangan pecahan, serta melakukan operasi perkalian dan pembagian pecahan dengan bilangan asli. 
+                    Mereka dapat membandingkan dan mengurutkan bilangan desimal dan mengubah pecahan menjadi desimal. 
+                    Mereka dapat mengisi nilai yang belum diketahui dalam sebuah kalimat matematika yang berkaitan dengan 
+                    operasi aritmetika pada bilangan cacah sampai 1000. Mereka dapat menyelesaikan masalah yang berkaitan 
+                    dengan KPK dan FPB.
+                </p>
+            </div>
+    
+            <!-- Kotak kedua -->
+            <div class="kotak bg-purple-500 w-full md:w-1/2 p-6 text-center shadow-lg rounded animate__animated animate__fadeInUpBig">
+                <h2 class="text-2xl font-semibold pb-4">Alur Tujuan Pembelajaran (ATP)</h2>
+                <ul class="pl-4 text-left">
+                    <li class="list-disc">Peserta didik mampu menentukan Kelipatan Persekutuan Terkecil (KPK) menggunakan media DAKOTA berbasis digital</li>
+                    <li class="list-disc">Peserta didik mampu menentukan faktor Persekutuan Terbesar (FPB) menggunakan media DAKOTA berbasis digital</li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex justify-normal w-3/4 mt-10">
+            <a href="menu.html" class="text-next bg-blue-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+            </a>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>

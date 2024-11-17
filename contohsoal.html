@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/Bg2.jpg");
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+        .kotak{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body class="relative overflow-hidden flex flex-col items-center place-content-center min-h-screen">
+        <!-- Latar belakang gambar dengan efek blur -->
+        <div class="bg-image"></div>
+        <!-- Container untuk dua kotak -->
+        <div class="container w-1/2 mx-auto">
+            <h1 class="text text-purple-500 pt-10 underline text-3xl lg:text-5xl md:text-4xl p-5 text-center animate__animated animate__fadeInDownBig" >
+                Contoh Soal</h1> 
+            <div class="kotak bg-purple-500 w-full p-6 pr-5 shadow-lg rounded animate__animated animate__fadeInDownBig">
+                <ul class="text-xs md:text-sm list-decimal list-inside">
+                    <li class="p-1">Tentukan kpk dari bilanagan 6 dan 12 ?</li>
+                    <li class="p-1">Tentukan fpb dri bilangan 24 dan 42 ?</li>
+                    <li class="p-1">Ibu memiliki 24 buah apel dan 36 buah jeruk. Ibu ingin membuat beberapa jenis kue dengan 
+                        jumlah apel dan jeruk yang sama banyak pada setiap jenis kue ?</li>
+                    <li class="p-1">Shinta pergi ke mall setiap 7 hari sekali, sedangkan Omas berkunjung ke mall setiap 14 hari sekali. 
+                        Di hari keberapa Shinta dan Omas bertemu ?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex justify-between w-1/2 mt-10">
+            <a href="menu.html" class="text-next bg-purple-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+            </a>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>

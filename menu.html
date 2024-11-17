@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Dakon KPK dan FPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+        /* Efek blur pada latar belakang */
+        .bg-image {
+            background-image: url("img/Bg2.jpg");
+            background-size: 100vw 100vh;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        /* Animasi untuk tombol */
+        .btn-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .text{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+
+        .text-next{
+            font-family: "DynaPuff", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+            color: white;
+        }
+
+        @media screen and (max-width: 680px) {
+        .bg-image {
+            background-size: cover;
+        }
+        }
+
+    </style>
+</head>
+<body class="relative overflow-hidden flex items-center justify-center min-h-screen">
+    <!-- Latar belakang gambar dengan efek blur -->
+    <div class="bg-image"></div>
+
+    <!-- Container Utama -->
+    <div class="p-8 sm:p-10 lg:p-12 w-full sm:w-full md:w-full lg:w-1/2">
+        <h1 class="text text-blue-400 text-5xl text-center sm:text-5xl md:text-6xl font-bold mt-18 animate__animated animate__fadeInDownBig">
+            
+        </h1>
+        <div class="text text-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 p-4 pt-10 w-full gap-5">
+            <a href="tujuan.html" class="bg-purple-500 text-center content-center h-20 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                 TUJUAN
+            </a>           
+            <a href="materi.html" class="bg-purple-500 text-center content-center h-20 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                 MATERI
+            </a>           
+            <a href="langkah.html" class="bg-purple-500 text-center content-center h-20 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                LANGKAH - LANGKAH
+            </a>           
+            <a href="contohsoal.html" class="bg-purple-500 text-center content-center h-20 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                 CONTOH SOAL
+            </a>           
+            <a href="media.html" class="bg-purple-500 text-center col-span-1 sm:col-span-2 md:col-span-2 content-center h-20 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+                MEDIA DAKON KPK DAN FPB
+            </a>           
+        </div>
+
+        <div class="flex justify-normal pl-4 mt-10">
+        <a href="index.html" class="text-next bg-blue-500 text-right inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
+            <i class="fa-solid fa-circle-chevron-right mr-1"></i> KEMBALI
+        </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
