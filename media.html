@@ -54,11 +54,11 @@
         }
   </style>
 </head>
-<body class="relative overflow-auto flex flex-col items-center place-content-center min-h-screen">
+<body class="relative overflow-auto flex flex-col items-center place-content-center min-h-screen p-20">
   <div class="bg-image"></div>
   <div>
   <h1 class="p-8 text text-3xl text-blue-500 md:text-5xl text-[#d3b18a] text-center animate__animated animate__fadeInLeftBig">DAKON KPK DAN FPB</h1>
-  <div class="flex flex-col items-center space-y-6 w-full">
+  <div class="flex flex-col items-center space-y-6">
     <div id="input-section" class="flex flex-col items-center space-y-6">
       <!-- Input Number 1 -->
       <div class="flex items-center space-x-2 min-w-full flex justify-between">
@@ -113,7 +113,7 @@
 
 
     <!-- Objek draggable yang akan dibuat berdasarkan input number (disembunyikan awalnya) -->
-  <div id="draggableObjects" class="flex space-x-4 mb-4 justify-between w-3/4 sm:w-3/4 md:w-1/2 hidden animate__animated animate__fadeInLeftBig">
+  <div id="draggableObjects" class="flex space-x-4 mb-4 justify-between hidden animate__animated animate__fadeInLeftBig">
     
   </div>
 
@@ -122,7 +122,7 @@
     </div>    
 
       <!-- 6x6 Button Grid -->
-      <div id="button-grid" class="bg-grid grid grid-cols-5 sm:grid-cols-5 md:grid-cols-10 w-full hidden gap-4 animate__animated animate__fadeInLeftBig">
+      <div id="button-grid" class="bg-grid grid grid-cols-5 sm:grid-cols-5 md:grid-cols-10 hidden gap-4 animate__animated animate__fadeInLeftBig">
         <!-- Buttons will be inserted here by JavaScript -->
       </div>
       <div class="flex justify-between w-full h-10">
