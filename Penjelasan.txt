@@ -1,0 +1,14 @@
+Penjelasan:
+HTML: Ada elemen input untuk memasukkan angka KPK, tombol untuk mengonfirmasi angka KPK, dan grid dengan 25 sel.
+CSS: Grid dan objek draggable disusun dengan CSS. Grid memiliki 5 kolom dan 5 baris, dan objek draggable diberi gaya agar mudah dikenali.
+JavaScript:
+btnKPK: Ketika tombol diklik, nilai dari input akan diambil dan diset sebagai KPK yang valid.
+dragstart: Ketika objek mulai di-drag, data transfer diset untuk objek yang sedang di-drag.
+dragover: Membolehkan event drop di area grid.
+drop: Memeriksa apakah posisi drop adalah kelipatan dari KPK yang diberikan. Jika tidak, akan muncul peringatan SweetAlert2. Jika ya, objek akan dipindahkan ke sel yang dipilih.
+Apa yang akan terjadi:
+Pengguna memasukkan angka KPK dan menekan tombol "Terapkan KPK".
+Mereka kemudian bisa mencoba mendrag objek ke salah satu sel grid.
+Jika objek di-drop pada sel dengan angka yang bukan kelipatan KPK yang dimasukkan, SweetAlert2 akan muncul dengan peringatan.
+Jika objek di-drop pada sel yang valid, objek akan dipindahkan ke sel tersebut.
+Dengan ini, Anda bisa menerapkan logika kelipatan KPK dengan visualisasi drag-and-drop yang interaktif!

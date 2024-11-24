@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draggable Grid KPK</title>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 100px);
+      grid-gap: 10px;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+      text-align: center;
+      line-height: 100px;
+      font-size: 20px;
+    }
+    .draggable {
+      width: 20px;
+      height: 20px;
+      background-color: lightblue;
+      text-align: center;
+      line-height: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      position: static;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="number" id="inputKPK" placeholder="Masukkan angka KPK" />
+  <button id="btnKPK">Terapkan KPK</button>
+
+  <div class="grid" id="grid">
+    <!-- Grid cells will be dynamically created -->
+  </div>
+
+  <div id="draggable" class="draggable" draggable="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+  <script>
+    // Set up grid cells dynamically
+    const grid = document.getElementById('grid');
+    const cellCount = 25; // Grid with 5x5 cells
+    for (let i = 1; i <= cellCount; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.textContent = i;
+      grid.appendChild(cell);
+    }
+
+    // Draggable element
+    const draggable = document.getElementById('draggable');
+    let validKPK = null;
+
+    // Terapkan angka KPK saat tombol diklik
+    document.getElementById('btnKPK').addEventListener('click', () => {
+      const kpk = parseInt(document.getElementById('inputKPK').value);
+      if (isNaN(kpk) || kpk <= 0) {
+        Swal.fire('Please enter a valid number for KPK.');
+      } else {
+        validKPK = kpk;
+      }
+    });
+
+    // Allow the element to be dragged
+    draggable.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text', 'draggable');
+    });
+
+     // Menangani drop event pada grid
+    grid.addEventListener('dragover', (e) => {
+      e.preventDefault(); // Memungkinkan objek untuk di-drop
+    });
+
+    grid.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const cell = e.target;
+      if (cell.classList.contains('cell')) {
+        const cellValue = parseInt(cell.textContent);
+        if (validKPK && cellValue % validKPK !== 0) {
+          // Jika bukan kelipatan KPK, tampilkan SweetAlert
+          Swal.fire({
+            title: 'Invalid Drop!',
+            text: `The number ${cellValue} is not a multiple of ${validKPK}.`,
+            icon: 'error',
+            confirmButtonText: 'Okay'
+          });
+        } else {
+          // Valid drop
+          cell.appendChild(draggable);
+          draggable.style.position = 'absolute';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
