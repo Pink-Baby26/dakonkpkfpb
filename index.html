@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <style>
 
         @font-face /*perintah untuk memanggil font eksternal*/
@@ -59,49 +61,42 @@
 
     
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-      </a>
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-          <li>
-            <a href="index.html" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+    <nav class="p-5 font-bold bg-white shadow md:flex md:items-center md:justify-between">
+        <div class="flex justify-between items-center ">
+          <span class="text-2xl font-[Poppins] cursor-pointer">
+            <a href="index.html">Media DAKOTA</a>
+          </span>
+    
+          <span class="text-3xl cursor-pointer mx-2 md:hidden block">
+            <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+          </span>
+        </div>
+    
+        <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Tujuan</a>
           </li>
-          <li>
-            <a href="tujuan.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Tujuan</a>
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Materi</a>
           </li>
-          <li>
-            <a href="materi.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Materi</a>
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Langlah-Langkah</a>
           </li>
-          <li>
-            <a href="langkah.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Langkah-Langkah</a>
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Perkalian</a>
           </li>
-          <li>
-            <a href="perkalian.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Perkalian</a>
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Contoh Soal</a>
           </li>
-          <li>
-            <a href="contohsoal.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contoh Soal</a>
-          </li>
-          <li>
-            <a href="media.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Media Pembelajaran</a>
+          <li class="mx-4 my-6 md:my-0">
+            <a href="#" class="text-xl hover:text-cyan-500 duration-500">Media</a>
           </li>
         </ul>
-      </div>
-    </div>
-  </nav>
+      </nav>
   
 
     <!-- Container Utama -->
-    <div class="p-8 sm:p-10 lg:p-12 justify-center mt-20">
+    <div class="p-8 sm:p-10 md:p-12 mt-64 sm:mt-40 md:mt-10 justify-center">
         <h1 class="text text-blue-300 text-3xl text-center sm:text-8xl md:text-9xl font-bold mb-4 md:mb-6 animate__animated animate__fadeInDownBig">
             DAKOTA 
         </h1>
@@ -125,6 +120,12 @@
                 window.location.href = 'menu.html';
             }
         });
+
+        function Menu(e){
+        let list = document.querySelector('ul');
+        e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100'), list.classList.add('z-40')) 
+        :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
+        }
     </script>
     
 </body>
