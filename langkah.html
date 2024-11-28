@@ -8,6 +8,8 @@
     <link rel="stylesheet" href=""> 
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <style>
         @font-face /*perintah untuk memanggil font eksternal*/
         {
@@ -17,7 +19,7 @@
 
         /* Efek blur pada latar belakang */
         .bg-image {
-            background-image: url("img/Bg2.jpg");
+            background-image: url("img/Bg2.png");
             background-size: 100vw 100vh;
             background-position: center;
             position: fixed;
@@ -25,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 30;
         }
         /* Animasi untuk tombol */
         .btn-hover:hover {
@@ -37,6 +39,13 @@
             font-family: "DynaPuff-medium";
             font-optical-sizing: auto;
             font-weight: 700;
+            font-style: normal;
+            font-variation-settings: 100;
+        }
+        .text2{
+            font-family: "DynaPuff-medium";
+            font-optical-sizing: auto;
+            font-weight: 400;
             font-style: normal;
             font-variation-settings: 100;
         }
@@ -58,6 +67,11 @@
             color: white;
             letter-spacing: 1px;
         }
+        .nav{
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
 
         @media screen and (max-width: 680px) {
         .bg-image {
@@ -66,14 +80,48 @@
         }
     </style>
 </head>
-<body class="flex flex-col items-center place-content-center min-h-screen">
+<body>
         <!-- Latar belakang gambar dengan efek blur -->
         <div class="bg-image"></div>
+
+        <nav class="nav text2 w-full text2 p-5 font-bold bg-white shadow md:flex md:items-center md:justify-between z-40">
+            <div class="flex justify-between items-center">
+              <span class="text-2xl font-[Poppins] cursor-pointer">
+                <a href="index.html">Media DAKOTA</a>
+              </span>
         
-        <h1 class="text text-blue-500 lg:text-4xl md:text-3xl sm:text-2xl p-5 text-center animate__animated animate__slideInDown" >Langkah-Langkah Penggunaan <br> Media Pembelajaran Dakota</h1>
-        <div class="container w-full sm:w-3/4 md:w-3/4 flex">
+              <span class="text-3xl cursor-pointer mx-2 md:hidden block">
+                <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+              </span>
+            </div>
+        
+            <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+              <li class="mx-4 my-6 md:my-0">
+                <a href="tujuan.html" class="text-xl hover:text-blue-500 duration-500">Tujuan</a>
+              </li>
+              <li class="mx-4 my-6 md:my-0">
+                <a href="materi.html" class="text-xl hover:text-blue-500 duration-500">Materi</a>
+              </li>
+              <li class="mx-4 my-6 md:my-0">
+                <a href="langkah.html" class="text-xl hover:text-blue-500 duration-500">Langkah-Langkah</a>
+              </li>
+              <li class="mx-4 my-6 md:my-0">
+                <a href="perkalian.html" class="text-xl hover:text-blue-500 duration-500">Perkalian</a>
+              </li>
+              <li class="mx-4 my-6 md:my-0">
+                <a href="contohsoal.html" class="text-xl hover:text-blue-500 duration-500">Contoh Soal</a>
+              </li>
+              <li class="mx-4 my-6 md:my-0">
+                <a href="media.html" class="text-xl hover:text-blue-500 duration-500">Media</a>
+              </li>
+            </ul>
+          </nav>
+        
+        <h1 class="text text-blue-500 mt-20 text-2xl lg:text-4xl md:text-3xl sm:text-2xl p-5 text-center animate__animated animate__slideInDown" >Langkah-Langkah Penggunaan <br> Media Pembelajaran Dakota</h1>
+        <div class="flex flex-col items-center place-content-center">
+        <div class="container w-3/4 sm:w-3/4 md:w-3/4 flex">
             <!-- Kotak pertama -->  
-            <div class="kotak bg-blue-500 lg:text-base md:text-sm sm:text-xs p-6 shadow-lg rounded animate__animated animate__slideInLeft">
+            <div class="kotak bg-blue-500 mb-20 lg:text-base md:text-sm sm:text-xs p-6 shadow-lg rounded animate__animated animate__slideInLeft">
                 <ul class="pl-5">
                     <li class="list-decimal p-1">Klik link yang sudah diberikan oleh guru</li>
                     <li class="list-decimal p-1">Setelah masuk ke halaman web terdapat laman untuk memilih angka/bilangan</li>
@@ -86,10 +134,6 @@
                 </ul>
             </div>
         </div>
-        <div class="flex justify-between w-3/4 mt-10">
-            <a href="menu.html" class="text-next bg-blue-500 text-right text-2xl inline-block font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg btn-hover transition duration-300 ease-in-out transform animate__animated animate__zoomIn">
-                <i class="fa-solid fa-circle-arrow-left"></i>
-            </a>
         </div>
         <script src="script.js"></script>
 </body>
