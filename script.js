@@ -105,7 +105,7 @@ function populateGrid() {
 
   for (let i = 1; i <= 50; i++) {
     const button = document.createElement('button');
-    button.className = 'text bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded-full relative';
+    button.className = 'text bg-gray-200 w-12 h-12 hover:bg-gray-300 text-black rounded-full relative';
     button.textContent = i; // Tampilkan angka grid
     button.setAttribute('data-grid-value', i); // Simpan nilai asli grid
     button.ondrop = drop;
