@@ -45,17 +45,15 @@ function calculateKPK() {
   const number1 = parseInt(document.getElementById('number1').value);
   const number2 = parseInt(document.getElementById('number2').value);
 
-  // Perhitungan KPK
   const kpkValue = lcm(number1, number2);
   populateGrid(kpkValue);
 
-  // Atur status untuk KPK
   isKPKCorrect = true;
   isFPBCorrect = false;
 
   displayCirclesAndGrid();
   generateDraggableObjects(number1, number2);
-
+  
   document.getElementById('fpb-btn').classList.add('hidden');
   document.getElementById('instruction-text').classList.add('hidden');
   checkBothCalculations();
@@ -68,11 +66,9 @@ function calculateFPB() {
   const number1 = parseInt(document.getElementById('number1').value);
   const number2 = parseInt(document.getElementById('number2').value);
 
-  // Perhitungan FPB
   const fpbValue = gcd(number1, number2);
   populateGrid(fpbValue);
 
-  // Atur status untuk FPB
   isFPBCorrect = true;
   isKPKCorrect = false;
 
@@ -80,7 +76,6 @@ function calculateFPB() {
   generateDraggableObjects(number1, number2);
 
   document.getElementById('kpk-btn').classList.add('hidden');
-
   document.getElementById('instruction-text').classList.add('hidden');
   checkBothCalculations();
   document.getElementById('reset-btn').classList.remove('hidden');
@@ -88,11 +83,12 @@ function calculateFPB() {
   document.getElementById('button-grid').classList.remove('hidden');
 }
 
-
+// Fungsi untuk menghitung KPK
 function lcm(a, b) {
   return Math.abs(a * b) / gcd(a, b);
 }
 
+// Fungsi untuk menghitung FPB
 function gcd(a, b) {
   while (b !== 0) {
     let temp = b;
@@ -102,6 +98,7 @@ function gcd(a, b) {
   return a;
 }
 
+// Fungsi untuk menampilkan grid
 function populateGrid() {
   const grid = document.getElementById('button-grid');
   grid.innerHTML = ''; // Kosongkan grid sebelumnya
@@ -121,31 +118,34 @@ function populateGrid() {
   }
 }
 
+let droppedIDs = [];
 
-
-// Fungsi untuk membuat objek draggable dari input number
 function generateDraggableObjects(number1, number2) {
   const draggableContainer = document.getElementById('draggableObjects');
-   // Kosongkan objek sebelumnya
-  draggableContainer.classList.remove('hidden'); // Tampilkan container
 
-  // Membuat objek draggable dari input 1
-  const object1 = document.createElement('div');
-  object1.id = 'draggable1';
-  object1.draggable = true;
-  object1.ondragstart = drag;
-  object1.className = 'text w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white';
-  object1.textContent = `${number1}`; // Menggunakan teks input1
-  draggableContainer.appendChild(object1);
+  draggableContainer.classList.remove('hidden');
 
-  // Membuat objek draggable dari input 2
-  const object2 = document.createElement('div');
-  object2.id = 'draggable2';
-  object2.draggable = true;
-  object2.ondragstart = drag;
-  object2.className = 'text w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white';
-  object2.textContent = `${number2}`; // Menggunakan teks input2
-  draggableContainer.appendChild(object2);
+  // Membuat objek draggable dari input 1 (jika belum ada)
+  if (!document.getElementById('draggable1')) {
+    const object1 = document.createElement('div');
+    object1.id = 'draggable1';
+    object1.className = 'draggable text w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white';
+    object1.draggable = true;
+    object1.ondragstart = drag;
+    object1.textContent = `${number1}`; // Menggunakan teks input1
+    draggableContainer.appendChild(object1);
+  }
+
+  // Membuat objek draggable dari input 2 (jika belum ada)
+  if (!document.getElementById('draggable2')) {
+    const object2 = document.createElement('div');
+    object2.id = 'draggable2';
+    object2.className = 'draggable text w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white';
+    object2.draggable = true;
+    object2.ondragstart = drag;
+    object2.textContent = `${number2}`; // Menggunakan teks input2
+    draggableContainer.appendChild(object2);
+  }
 }
 
 function displayCirclesAndGrid() {
@@ -154,6 +154,7 @@ function displayCirclesAndGrid() {
   document.getElementById('output-section').classList.remove('hidden');
 }
 
+// Fungsi drag untuk mendrag objek
 function drag(event) {
   event.dataTransfer.setData("text", event.target.id);
 }
@@ -167,31 +168,27 @@ function drop(event) {
 
   const data = event.dataTransfer.getData("text");
   const droppedObject = document.getElementById(data);
-
   const targetButton = event.target;
 
-  // Ambil elemen draggable yang sudah ada di grid ini
-  const existingObjects = targetButton.querySelectorAll('.rounded-full');
-
-  // Jika grid sudah berisi 2 objek draggable, tampilkan peringatan
-  if (existingObjects.length >= 2) {
-    Swal.fire({
-      title: 'Opsss!!',
-      text: 'Disini sudah terisi angka tersebut!!',
-      icon: 'warning',
-      showConfirmButton: false,
-      timer: 1000
-    });
-    return;
-  }
-
-  // Ambil nilai asli grid dari atribut data
+  // Ambil nilai dari grid (atribut data-grid-value)
   const gridValue = parseInt(targetButton.getAttribute('data-grid-value'));
 
   // Ambil nilai dari objek draggable
   const draggableValue = parseInt(droppedObject.textContent);
 
-  // Validasi objek draggable terhadap nilai grid
+  // Cek apakah objek ini sudah ter-drop sebelumnya di grid yang sama
+  if (droppedIDs.includes(data + gridValue)) {
+    Swal.fire({
+      title: 'Opsss!!',
+      text: 'Objek ini sudah pernah ter-drop pada grid ini!',
+      icon: 'warning',
+      showConfirmButton: false,
+      timer: 1000
+    });
+    return; // Batalkan drop jika objek sudah ada di grid yang sama
+  }
+
+  // Validasi objek draggable terhadap nilai grid: kelipatan atau faktor
   if (isKPKCorrect) {
     if (gridValue % draggableValue !== 0) {
       Swal.fire({
@@ -201,7 +198,7 @@ function drop(event) {
         showConfirmButton: false,
         timer: 1000
       });
-      return;
+      return; // Jika bukan kelipatan, batalkan drop
     }
   } else if (isFPBCorrect) {
     if (draggableValue % gridValue !== 0) {
@@ -212,8 +209,23 @@ function drop(event) {
         showConfirmButton: false,
         timer: 1000
       });
-      return;
+      return; // Jika bukan faktor, batalkan drop
     }
+  }
+
+  // Ambil elemen draggable yang sudah ada di dalam grid ini
+  const existingObjects = targetButton.querySelectorAll('.rounded-full');
+
+  // Jika grid sudah berisi 2 objek draggable, tampilkan peringatan
+  if (existingObjects.length >= 2) {
+    Swal.fire({
+      title: 'Opsss!!',
+      text: 'Di sini sudah terisi 2 objek draggable!',
+      icon: 'warning',
+      showConfirmButton: false,
+      timer: 1000
+    });
+    return;
   }
 
   // Tambahkan elemen visual untuk objek draggable
@@ -228,16 +240,17 @@ function drop(event) {
 
   targetButton.appendChild(miniObject);
 
+  // Tandai objek ini sebagai sudah ter-drop pada grid tertentu
+  droppedIDs.push(data + gridValue); // Tandai dengan kombinasi ID objek dan ID grid
+
   Swal.fire({
     title: 'Berhasil!',
-    text: 'Angka Berhasil disimpan',
+    text: 'Angka berhasil disimpan!',
     icon: 'success',
     showConfirmButton: false,
     timer: 1000
   });
 }
-
-
 
 
 // Tambahkan variabel untuk menyimpan hasil KPK dan FPB
@@ -301,7 +314,7 @@ function validateAnswer(button) {
       if (isValid) {
         button.classList.add('bg-green-500');
         Swal.fire('Benar!', `Jawaban Anda benar. ${metode} dari ${number1} dan ${number2} adalah ${correctAnswer}.`, 'success');
-        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('next-btn').classList.remove('hidden'),document.getElementById('draggableObjects').classList.add('hidden');
       } else {
         button.classList.add('bg-red-500');
         Swal.fire('Salah!', `Cek Lagi Jawabannya!!.`, 'error');
@@ -328,6 +341,7 @@ function gcd(a, b) {
 
 
 function resetGrid() {
+  // Menampilkan konfirmasi reset
   Swal.fire({
     title: 'Konfirmasi',
     text: "Apakah Anda yakin ingin mereset grid? Semua objek yang di-drop akan dihapus.",
@@ -337,64 +351,76 @@ function resetGrid() {
     cancelButtonText: 'Tidak'
   }).then((result) => {
     if (result.isConfirmed) {
+      // Menghapus objek dari grid
       const gridButtons = document.querySelectorAll('#button-grid button');
-      droppedCount = 0;
       gridButtons.forEach(button => {
         const droppedObjects = button.querySelectorAll('.rounded-full');
         droppedObjects.forEach(object => {
-          button.removeChild(object);
+          button.removeChild(object); // Menghapus objek yang ada
         });
+        // Mengembalikan warna tombol grid ke semula
         button.classList.remove('bg-green-500', 'bg-red-500');
         button.classList.add('bg-gray-200', 'hover:bg-gray-300');
       });
 
+      // Mengosongkan array droppedIDs
+      droppedIDs = [];
+
       Swal.fire({
         title: 'Reset!',
-        text: 'Grid telah direset.',
+        text: 'Grid telah direset, Anda dapat memulai lagi!',
         icon: 'success',
         confirmButtonText: 'OK'
-      });
+      })
+      ;
     }
   });
 }
 
+function confirmGrid() {
+      // Menghapus objek dari grid
+      const gridButtons = document.querySelectorAll('#button-grid button');
+      gridButtons.forEach(button => {
+        const droppedObjects = button.querySelectorAll('.rounded-full');
+        droppedObjects.forEach(object => {
+          button.removeChild(object); // Menghapus objek yang ada
+        });
+        // Mengembalikan warna tombol grid ke semula
+        button.classList.remove('bg-green-500', 'bg-red-500');
+        button.classList.add('bg-gray-200', 'hover:bg-gray-300');
+      });
+
+      // Mengosongkan array droppedIDs
+      droppedIDs = [];
+    }
+
 function nextstep() {
+  // Menampilkan konfirmasi untuk lanjut
   Swal.fire({
-      title: 'Lanjut ke Perhitungan Selanjutnya',
-      text: '',
-      icon: 'info',
-      showConfirmButton: false,
-      timer: 1000
-  }).then((result) => {
-      if (result.isConfirmed) {
-          // Reset grid
-          const gridButtons = document.querySelectorAll('#button-grid button');
-          droppedCount = 0;
-          gridButtons.forEach(button => {
-              const droppedObjects = button.querySelectorAll('.rounded-full');
-              droppedObjects.forEach(object => {
-                  button.removeChild(object);
-              });
-              button.classList.remove('bg-green-500', 'bg-red-500');
-              button.classList.add('bg-gray-200', 'hover:bg-gray-300');
-          });
+    title: 'Lanjut ke Perhitungan Selanjutnya',
+    text: '',
+    icon: 'info',
+    showConfirmButton: false,
+    timer: 1000
+  }).then(() => {
+    // Reset grid
+    confirmGrid();
 
-          // Reset draggable objects
-          const draggableContainer = document.getElementById('draggableObjects');
-          while (draggableContainer.firstChild) {
-              draggableContainer.removeChild(draggableContainer.firstChild);
-          }
-          draggableContainer.classList.add('hidden'); // Sembunyikan container
+    // Menghapus objek draggable dari layar
+    const draggableContainer = document.getElementById('draggableObjects');
+    while (draggableContainer.firstChild) {
+      draggableContainer.removeChild(draggableContainer.firstChild);
+    }
+    draggableContainer.classList.add('hidden'); // Menyembunyikan objek draggable
 
-          // Tampilkan tombol dan teks yang relevan
-          document.getElementById('instruction-text').classList.remove('hidden');
-          document.getElementById('pilih-text').classList.add('hidden');
-          document.getElementById('button-grid').classList.add('hidden');
-          document.getElementById('reset-btn').classList.add('hidden');
+    // Menampilkan kembali instruksi dan tombol untuk KPK/FPB
+    document.getElementById('instruction-text').classList.remove('hidden');
+    document.getElementById('pilih-text').classList.add('hidden');
+    document.getElementById('button-grid').classList.add('hidden');
+    document.getElementById('reset-btn').classList.add('hidden');
 
-          // Periksa apakah tombol lanjut perlu direset
-          checkBothCalculations();
-      }
+    // Periksa apakah tombol lanjut perlu direset
+    checkBothCalculations();
   });
 }
 
@@ -409,7 +435,7 @@ function showNextOptions() {
   document.getElementById('pilih-text').classList.add('hidden');
   document.getElementById('button-grid').classList.add('hidden');
   document.getElementById('reset-btn').classList.add('hidden');
-  document.getElementById('draggableObjects').classList.add('hidden');
+  document.getElementById('draggableObjects').classList.remove('hidden');
 
   nextstep();
 }
